@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:BarberAppFront.ViewModels"
+             x:DataType="viewmodels:DashboardViewModel"
+             x:Class="BarberAppFront.Views.DashboardPage"
+             Title="Dashboard">
+    <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="CenterAndExpand">
+        <Label Text="¡Bienvenido al Dashboard de BarberApp!" FontSize="Title" HorizontalOptions="Center" />
+        <Label Text="{Binding WelcomeMessage}" FontSize="Medium" HorizontalOptions="Center" />
+
+        <Button Text="Gestionar Servicios Realizados" Command="{Binding GoToPrestacionesCommand}" HorizontalOptions="FillAndExpand" />
+        <Button Text="Ver Mis Pagos" Command="{Binding GoToPagosCommand}" HorizontalOptions="FillAndExpand" />
+
+        <Button Text="Registrar Nuevo Usuario" Command="{Binding GoToRegisterUserCommand}" 
+                IsVisible="{Binding IsAdmin}" HorizontalOptions="FillAndExpand" />
+
+    </VerticalStackLayout>
+</ContentPage>

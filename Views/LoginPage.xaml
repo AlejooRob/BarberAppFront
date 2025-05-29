@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:BarberAppFront.ViewModels"
+             x:DataType="viewmodels:LoginViewModel"
+             x:Class="BarberAppFront.Views.LoginPage"
+             Title="Iniciar Sesión">
+    <!--<ContentPage.BindingContext>
+        <viewmodels:LoginViewModel />
+    </ContentPage.BindingContext>-->
+
+    <VerticalStackLayout Spacing="10" Padding="30" VerticalOptions="CenterAndExpand">
+        <Label Text="Bienvenido a BarberApp" FontSize="Header" HorizontalOptions="Center" />
+
+        <Entry Placeholder="Nombre de usuario" Text="{Binding Username}" />
+        <Entry Placeholder="Contraseña" IsPassword="True" Text="{Binding Password}" />
+
+        <Button Text="Iniciar Sesión" Command="{Binding LoginCommand}" HorizontalOptions="FillAndExpand" />
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" Color="Blue" />
+
+        <Label Text="{Binding ErrorMessage}" TextColor="Red" HorizontalOptions="Center" IsVisible="{Binding HasError}" />
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:BarberAppFront.ViewModels"
+             xmlns:models="clr-namespace:BarberAppFront.Models"
+             x:DataType="viewmodels:RegisterUserViewModel"
+             x:Class="BarberAppFront.Views.RegisterUserPage"
+             Title="Registrar Usuario (Admin)">
+    <!--<ContentPage.BindingContext>
+        <viewmodels:RegisterUserViewModel />
+    </ContentPage.BindingContext>-->
+
+    <VerticalStackLayout Spacing="10" Padding="30" VerticalOptions="CenterAndExpand">
+        <Label Text="Registrar Nuevo Usuario" FontSize="Header" HorizontalOptions="Center" />
+
+        <Entry Placeholder="Nombre de usuario" Text="{Binding Username}" />
+        <Entry Placeholder="Contraseña" IsPassword="True" Text="{Binding Password}" />
+        <Entry Placeholder="Nombre Completo" Text="{Binding NombreCompleto}" />
+
+        <Picker Title="Seleccione Rol"
+                ItemsSource="{Binding Roles}"
+                SelectedItem="{Binding SelectedRole}"
+                ItemDisplayBinding="{Binding .}" />
+
+        <Picker Title="Seleccione Estado"
+                ItemsSource="{Binding Estados}"
+                SelectedItem="{Binding SelectedEstado}"
+                ItemDisplayBinding="{Binding .}" />
+
+        <Button Text="Registrar" Command="{Binding RegisterUserCommand}" HorizontalOptions="FillAndExpand" />
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" Color="Blue" />
+
+        <Label Text="{Binding Message}" TextColor="Green" HorizontalOptions="Center" IsVisible="{Binding HasMessage}" />
+        <Label Text="{Binding ErrorMessage}" TextColor="Red" HorizontalOptions="Center" IsVisible="{Binding HasError}" />
+
+    </VerticalStackLayout>
+</ContentPage>
