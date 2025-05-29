@@ -22,10 +22,8 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // Registrar el DelegatingHandler
         builder.Services.AddTransient<AuthHeaderHandler>();
 
-        // Registrar las interfaces de Refit para tus APIs
         string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:8080" : "http://localhost:8080";
 
         builder.Services.AddRefitClient<IAuthService>()
@@ -35,16 +33,30 @@ public static class MauiProgram
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl + "/api/usuarios"))
                 .AddHttpMessageHandler<AuthHeaderHandler>();
 
-        // Registrar tus ViewModels y Páginas
+        builder.Services.AddRefitClient<IPrestacionServicioService>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl + "/api/prestaciones"))
+                .AddHttpMessageHandler<AuthHeaderHandler>();
+
+        builder.Services.AddRefitClient<IServicioService>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl + "/api/servicios"))
+                .AddHttpMessageHandler<AuthHeaderHandler>();
+
+        // Registrar ViewModels y Páginas
         builder.Services.AddSingleton<LoginViewModel>();
         builder.Services.AddSingleton<LoginPage>();
 
         builder.Services.AddSingleton<RegisterUserViewModel>();
         builder.Services.AddSingleton<RegisterUserPage>();
 
-        // NUEVO: Registrar DashboardViewModel y DashboardPage
         builder.Services.AddSingleton<DashboardViewModel>();
         builder.Services.AddSingleton<DashboardPage>();
+
+        builder.Services.AddSingleton<PrestacionesViewModel>();
+        builder.Services.AddSingleton<PrestacionesPage>();
+
+        // NUEVO: Registrar AddEditPrestacionViewModel y AddEditPrestacionPage
+        builder.Services.AddSingleton<AddEditPrestacionViewModel>();
+        builder.Services.AddSingleton<AddEditPrestacionPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

@@ -67,17 +67,21 @@ namespace BarberAppFront.ViewModels
             }
         }
 
-        // Comandos de navegación para otras secciones (implementar más adelante)
         [RelayCommand]
         private async Task GoToPrestaciones()
         {
-            await Application.Current.MainPage.DisplayAlert("Funcionalidad Pendiente", "Navegar a la gestión de prestaciones.", "OK");
-            // Aquí iría la navegación real:
-            // if (Application.Current.MainPage is NavigationPage navigationPage)
-            // {
-            //     var prestacionesPage = _serviceProvider.GetService<PrestacionesPage>(); // Necesitas crear esta página y ViewModel
-            //     await navigationPage.PushAsync(prestacionesPage);
-            // }
+            if (Application.Current.MainPage is NavigationPage navigationPage)
+            {
+                var prestacionesPage = _serviceProvider.GetService<PrestacionesPage>(); // Resolvemos la página
+                if (prestacionesPage != null)
+                {
+                    await navigationPage.PushAsync(prestacionesPage); // Navegamos a ella
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "La página de prestaciones no está disponible.", "OK");
+                }
+            }
         }
 
         [RelayCommand]

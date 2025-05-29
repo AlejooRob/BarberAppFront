@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:BarberAppFront.ViewModels"
+             xmlns:models="clr-namespace:BarberAppFront.Models"
+             x:DataType="viewmodels:PrestacionesViewModel"
+             x:Class="BarberAppFront.Views.PrestacionesPage"
+             Title="Mis Prestaciones de Servicio">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Añadir Prestación" Command="{Binding AddPrestacionCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="Prestaciones de Servicio" FontSize="Title" HorizontalOptions="Center" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" Color="Blue" />
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding HasError}" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Prestaciones}" SelectionMode="Single"
+                        SelectedItem="{Binding SelectedPrestacion}">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                    <Label Text="No hay prestaciones registradas." FontSize="Medium" TextColor="Gray" />
+                    <Button Text="Añadir la primera" Command="{Binding AddPrestacionCommand}" Margin="10" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:PrestacionServicio">
+                    <Frame Margin="5" Padding="10" CornerRadius="5" HasShadow="True">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Servicio.Nombre}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="{Binding Barbero.NombreCompleto, StringFormat='Realizado por: {0}'}" FontSize="Small" />
+                            <Label Text="{Binding FechaHora, StringFormat='Fecha: {0:dd/MM/yyyy HH:mm}'}" FontSize="Small" />
+                            <Label Text="{Binding PrecioReal, StringFormat='Precio: {0:C}'}" FontSize="Small" />
+                            <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" FontSize="Small" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
