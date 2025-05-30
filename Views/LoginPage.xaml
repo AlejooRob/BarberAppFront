@@ -4,6 +4,7 @@
              xmlns:viewmodels="clr-namespace:BarberAppFront.ViewModels"
              x:DataType="viewmodels:LoginViewModel"
              x:Class="BarberAppFront.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False"
              Title="Iniciar Sesión">
     <!--<ContentPage.BindingContext>
         <viewmodels:LoginViewModel />

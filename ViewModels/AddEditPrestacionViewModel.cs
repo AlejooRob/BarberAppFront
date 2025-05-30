@@ -88,13 +88,7 @@ namespace BarberAppFront.ViewModels
                 if (!string.IsNullOrEmpty(userIdString))
                 {
                     long userId = long.Parse(userIdString);
-                    // Opcional: obtener el objeto Usuario completo si el backend lo permite
-                    // ApiResponse<Usuario> userResponse = await _usuarioService.GetUserById(userId);
-                    // if (userResponse.IsSuccessStatusCode && userResponse.Content != null)
-                    // {
-                    //     CurrentPrestacion.Barbero = userResponse.Content;
-                    // }
-                    // Por ahora, solo creamos un objeto Usuario con el ID para la serialización
+                    
                     CurrentPrestacion.Barbero = new Usuario { Id = userId, NombreCompleto = Preferences.Get("userName", "Barbero Desconocido") };
                     // Guardar nombre de usuario también en preferences al loguearse para mostrarlo
                 }
